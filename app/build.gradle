@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+apply from: "$rootProject.projectDir/gradle/libraries.gradle"
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "id.sanggar.pair"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation lifecycle.androidX
+    implementation lifecycle.viewModel
+    implementation lifecycle.appCompat
+
+    implementation network.retrofit
+    implementation network.gsonRetrofitConverter
+    implementation network.coroutineAdapter
+
+    implementation design.material
+    implementation design.constraintLayout
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation testing.junit
+    androidTestImplementation testing.espresso
+}
